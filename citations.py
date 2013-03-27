@@ -9,6 +9,13 @@ import time
 import json
 import datetime
 
+# INSPIRES uses a weird format which doesn't comform to the MARC21 spec. For
+# the given tag values no subfields are supported, by INSPIRES uses them
+# nevertheless. Use a dirty hack to have subfields members in pymarc on fields
+# anyway, might break on updates and screw up pymarc internal, but works for
+# this application ATM.
+pymarc.Field.subfields = []
+
 ### DATABASE ABSTRACTION ###########################
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
